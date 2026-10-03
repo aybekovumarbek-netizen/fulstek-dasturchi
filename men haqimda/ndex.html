@@ -1,0 +1,1725 @@
+<!doctype html>
+<html lang="uz">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Umarbek - Frontend / Web Developer Personal Portfolio Website"
+    />
+    <meta
+      name="keywords"
+      content="Umarbek, Frontend Developer, Web Developer, React, JavaScript, HTML, CSS, Portfolio"
+    />
+    <meta name="author" content="Umarbek" />
+    <title>Umarbek — Frontend Developer</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- FontAwesome Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+
+    <style>
+      /* ==========================================================================
+           DESIGN SYSTEM & VARIABLES
+           ========================================================================== */
+      :root {
+        --bg-dark: #0a0c10;
+        --bg-card: #12161f;
+        --bg-card-hover: #1a202c;
+        --border-color: rgba(255, 255, 255, 0.08);
+        --border-color-hover: rgba(56, 189, 248, 0.3);
+
+        --text-primary: #f8fafc;
+        --text-secondary: #94a3b8;
+        --text-muted: #64748b;
+
+        --accent-primary: #38bdf8; /* Modern Cyan Blue */
+        --accent-secondary: #818cf8; /* Indigo Glow */
+        --accent-gradient: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
+        --glass-bg: rgba(18, 22, 31, 0.75);
+
+        --font-main: "Plus Jakarta Sans", sans-serif;
+        --font-mono: "JetBrains Mono", monospace;
+
+        --transition-fast: 0.2s ease;
+        --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        --radius-sm: 8px;
+        --radius-md: 16px;
+        --radius-lg: 24px;
+      }
+
+      /* ==========================================================================
+           RESET & BASE STYLES
+           ========================================================================== */
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html {
+        scroll-behavior: smooth;
+        font-size: 16px;
+      }
+
+      body {
+        background-color: var(--bg-dark);
+        color: var(--text-primary);
+        font-family: var(--font-main);
+        line-height: 1.6;
+        overflow-x: hidden;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      ul {
+        list-style: none;
+      }
+
+      img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+      }
+
+      .container {
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 24px;
+      }
+
+      /* ==========================================================================
+           TYPOGRAPHY & SECTION HEADERS
+           ========================================================================== */
+      .section-header {
+        text-align: center;
+        margin-bottom: 60px;
+      }
+
+      .section-subtitle {
+        font-family: var(--font-mono);
+        color: var(--accent-primary);
+        font-size: 0.9rem;
+        letter-spacing: 2px;
+        display: block;
+        margin-bottom: 8px;
+      }
+
+      .section-title {
+        font-size: 2.5rem;
+        font-weight: 800;
+        background: linear-gradient(180deg, #ffffff 0%, #94a3b8 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .accent-text {
+        background: var(--accent-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      /* ==========================================================================
+           BUTTONS
+           ========================================================================== */
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        padding: 14px 28px;
+        font-weight: 600;
+        font-size: 0.95rem;
+        border-radius: var(--radius-sm);
+        transition: var(--transition-normal);
+        cursor: pointer;
+        border: 1px solid transparent;
+      }
+
+      .btn-primary {
+        background: var(--accent-gradient);
+        color: #000;
+        box-shadow: 0 4px 20px rgba(56, 189, 248, 0.25);
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 25px rgba(56, 189, 248, 0.4);
+      }
+
+      .btn-secondary {
+        background: var(--bg-card);
+        color: var(--text-primary);
+        border-color: var(--border-color);
+      }
+
+      .btn-secondary:hover {
+        background: var(--bg-card-hover);
+        border-color: var(--accent-primary);
+        transform: translateY(-2px);
+      }
+
+      .btn-outline {
+        background: transparent;
+        color: var(--text-primary);
+        border-color: var(--border-color);
+      }
+
+      .btn-outline:hover {
+        border-color: var(--text-primary);
+        background: rgba(255, 255, 255, 0.05);
+      }
+
+      .btn-block {
+        width: 100%;
+      }
+
+      /* ==========================================================================
+           NAVBAR
+           ========================================================================== */
+      .navbar-header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1000;
+        transition: var(--transition-normal);
+        padding: 20px 0;
+      }
+
+      .navbar-header.scrolled {
+        background: var(--glass-bg);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        padding: 14px 0;
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      .navbar-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo {
+        font-size: 1.5rem;
+        font-weight: 800;
+        letter-spacing: -0.5px;
+      }
+
+      .logo-code {
+        color: var(--accent-primary);
+        font-family: var(--font-mono);
+      }
+
+      .nav-list {
+        display: flex;
+        gap: 32px;
+      }
+
+      .nav-link {
+        color: var(--text-secondary);
+        font-weight: 500;
+        font-size: 0.95rem;
+        transition: var(--transition-fast);
+        position: relative;
+      }
+
+      .nav-link:hover,
+      .nav-link.active {
+        color: var(--text-primary);
+      }
+
+      .nav-link.active::after {
+        content: "";
+        position: absolute;
+        bottom: -6px;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: var(--accent-primary);
+        border-radius: 2px;
+      }
+
+      .hamburger {
+        display: none;
+        flex-direction: column;
+        gap: 6px;
+        cursor: pointer;
+      }
+
+      .bar {
+        width: 25px;
+        height: 2px;
+        background-color: var(--text-primary);
+        transition: var(--transition-normal);
+      }
+
+      /* ==========================================================================
+           HERO SECTION
+           ========================================================================== */
+      .hero-section {
+        padding: 180px 0 100px;
+        position: relative;
+      }
+
+      .hero-container {
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr;
+        gap: 60px;
+        align-items: center;
+      }
+
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(56, 189, 248, 0.1);
+        border: 1px solid rgba(56, 189, 248, 0.2);
+        padding: 6px 16px;
+        border-radius: 30px;
+        color: var(--accent-primary);
+        font-size: 0.85rem;
+        font-weight: 600;
+        margin-bottom: 24px;
+      }
+
+      .pulse-dot {
+        width: 8px;
+        height: 8px;
+        background: var(--accent-primary);
+        border-radius: 50%;
+        box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.7);
+        animation: pulse 2s infinite;
+      }
+
+      @keyframes pulse {
+        0% {
+          box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.7);
+        }
+        70% {
+          box-shadow: 0 0 0 10px rgba(56, 189, 248, 0);
+        }
+        100% {
+          box-shadow: 0 0 0 0 rgba(56, 189, 248, 0);
+        }
+      }
+
+      .hero-title {
+        font-size: 3.5rem;
+        font-weight: 800;
+        line-height: 1.1;
+        margin-bottom: 12px;
+      }
+
+      .hero-subtitle {
+        font-size: 1.8rem;
+        color: var(--text-secondary);
+        font-weight: 600;
+        margin-bottom: 20px;
+      }
+
+      .hero-description {
+        font-size: 1.1rem;
+        color: var(--text-muted);
+        max-width: 540px;
+        margin-bottom: 30px;
+      }
+
+      /* Manifesto Card */
+      .manifesto-card {
+        background: var(--glass-bg);
+        border: 1px solid var(--border-color);
+        padding: 20px;
+        border-radius: var(--radius-md);
+        display: flex;
+        gap: 16px;
+        margin-bottom: 36px;
+        backdrop-filter: blur(10px);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .manifesto-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 4px;
+        height: 100%;
+        background: var(--accent-gradient);
+      }
+
+      .manifesto-icon {
+        color: var(--accent-primary);
+        font-size: 1.5rem;
+        margin-top: 2px;
+      }
+
+      .manifesto-title {
+        display: block;
+        font-weight: 700;
+        font-size: 0.95rem;
+        color: var(--text-primary);
+        margin-bottom: 4px;
+      }
+
+      .manifesto-text p {
+        font-size: 0.9rem;
+        color: var(--text-secondary);
+        line-height: 1.5;
+      }
+
+      .hero-cta {
+        display: flex;
+        gap: 16px;
+        flex-wrap: wrap;
+      }
+
+      /* Image Wrapper & Effects */
+      .hero-image-wrapper {
+        position: relative;
+        display: flex;
+        justify-content: center;
+      }
+
+      .image-card {
+        position: relative;
+        width: 320px;
+        height: 400px;
+        border-radius: var(--radius-lg);
+        overflow: hidden;
+        border: 1px solid var(--border-color);
+        z-index: 2;
+        background: var(--bg-card);
+      }
+
+      .image-card img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: var(--transition-normal);
+      }
+
+      .image-card:hover img {
+        transform: scale(1.03);
+      }
+
+      .image-border-glow {
+        position: absolute;
+        width: 330px;
+        height: 410px;
+        background: var(--accent-gradient);
+        border-radius: var(--radius-lg);
+        filter: blur(20px);
+        opacity: 0.3;
+        z-index: 1;
+        transition: var(--transition-normal);
+      }
+
+      .hero-image-wrapper:hover .image-border-glow {
+        opacity: 0.6;
+        filter: blur(25px);
+      }
+
+      .floating-badge {
+        position: absolute;
+        background: var(--glass-bg);
+        border: 1px solid var(--border-color);
+        padding: 10px 18px;
+        border-radius: 30px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        backdrop-filter: blur(10px);
+        z-index: 3;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .floating-badge i {
+        color: var(--accent-primary);
+      }
+
+      .badge-1 {
+        top: 20px;
+        left: -10px;
+      }
+
+      .badge-2 {
+        bottom: 30px;
+        right: -10px;
+      }
+
+      /* ==========================================================================
+           ABOUT SECTION
+           ========================================================================== */
+      .about-section {
+        padding: 100px 0;
+        background: rgba(255, 255, 255, 0.01);
+      }
+
+      .about-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 50px;
+      }
+
+      .lead-text {
+        font-size: 1.2rem;
+        line-height: 1.7;
+        color: var(--text-primary);
+        margin-bottom: 20px;
+        font-weight: 500;
+      }
+
+      .secondary-text {
+        color: var(--text-muted);
+        font-size: 1rem;
+      }
+
+      .about-directions-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+      }
+
+      .dir-card {
+        background: var(--bg-card);
+        border: 1px solid var(--border-color);
+        padding: 20px;
+        border-radius: var(--radius-md);
+        transition: var(--transition-normal);
+      }
+
+      .dir-card:hover {
+        border-color: var(--border-color-hover);
+        transform: translateY(-4px);
+      }
+
+      .dir-card i {
+        font-size: 1.5rem;
+        color: var(--accent-primary);
+        margin-bottom: 12px;
+      }
+
+      .dir-card h4 {
+        font-size: 1rem;
+        font-weight: 700;
+      }
+
+      /* ==========================================================================
+           SKILLS SECTION
+           ========================================================================== */
+      .skills-section {
+        padding: 100px 0;
+      }
+
+      .skills-category {
+        margin-bottom: 40px;
+      }
+
+      .category-title {
+        font-size: 1.2rem;
+        margin-bottom: 20px;
+        color: var(--text-secondary);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .category-title::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: var(--border-color);
+      }
+
+      .skills-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+        gap: 20px;
+      }
+
+      .skill-card {
+        background: var(--bg-card);
+        border: 1px solid var(--border-color);
+        padding: 20px;
+        border-radius: var(--radius-md);
+        display: flex;
+        align-items: flex-start;
+        gap: 16px;
+        transition: var(--transition-normal);
+      }
+
+      .skill-card:hover {
+        border-color: var(--border-color-hover);
+        background: var(--bg-card-hover);
+        transform: translateY(-4px);
+      }
+
+      .skill-icon {
+        font-size: 2rem;
+        color: var(--accent-primary);
+      }
+
+      .skill-info h4 {
+        font-size: 1.05rem;
+        font-weight: 700;
+        margin-bottom: 4px;
+      }
+
+      .skill-info p {
+        font-size: 0.85rem;
+        color: var(--text-muted);
+      }
+
+      /* ==========================================================================
+           SERVICES SECTION
+           ========================================================================== */
+      .services-section {
+        padding: 100px 0;
+        background: rgba(255, 255, 255, 0.01);
+      }
+
+      .services-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+        gap: 24px;
+      }
+
+      .service-card {
+        background: var(--bg-card);
+        border: 1px solid var(--border-color);
+        padding: 32px;
+        border-radius: var(--radius-md);
+        transition: var(--transition-normal);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+
+      .service-card:hover {
+        border-color: var(--accent-primary);
+        transform: translateY(-6px);
+      }
+
+      .service-icon {
+        width: 50px;
+        height: 50px;
+        background: rgba(56, 189, 248, 0.1);
+        border-radius: var(--radius-sm);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.4rem;
+        color: var(--accent-primary);
+        margin-bottom: 24px;
+      }
+
+      .service-title {
+        font-size: 1.25rem;
+        font-weight: 700;
+        margin-bottom: 12px;
+      }
+
+      .service-desc {
+        color: var(--text-muted);
+        font-size: 0.95rem;
+        margin-bottom: 24px;
+        line-height: 1.6;
+      }
+
+      /* ==========================================================================
+           PROJECTS SECTION
+           ========================================================================== */
+      .projects-section {
+        padding: 100px 0;
+      }
+
+      .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+        gap: 30px;
+      }
+
+      .project-card {
+        background: var(--bg-card);
+        border: 1px solid var(--border-color);
+        border-radius: var(--radius-md);
+        overflow: hidden;
+        transition: var(--transition-normal);
+        display: flex;
+        flex-direction: column;
+      }
+
+      .project-card:hover {
+        border-color: var(--border-color-hover);
+        transform: translateY(-6px);
+      }
+
+      .project-image {
+        width: 100%;
+        height: 220px;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .project-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: var(--transition-normal);
+      }
+
+      .project-card:hover .project-image img {
+        transform: scale(1.05);
+      }
+
+      .project-content {
+        padding: 24px;
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+      }
+
+      .project-title {
+        font-size: 1.3rem;
+        font-weight: 700;
+        margin-bottom: 10px;
+      }
+
+      .project-desc {
+        font-size: 0.9rem;
+        color: var(--text-muted);
+        margin-bottom: 20px;
+        flex: 1;
+      }
+
+      .project-tech {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 20px;
+      }
+
+      .tech-tag {
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        background: rgba(255, 255, 255, 0.05);
+        padding: 4px 10px;
+        border-radius: 4px;
+        color: var(--text-secondary);
+      }
+
+      .project-links {
+        display: flex;
+        gap: 12px;
+      }
+
+      /* ==========================================================================
+           SOCIAL LINKS SECTION
+           ========================================================================== */
+      .social-section {
+        padding: 60px 0;
+      }
+
+      .social-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+      }
+
+      .social-card {
+        background: var(--bg-card);
+        border: 1px solid var(--border-color);
+        padding: 28px;
+        border-radius: var(--radius-md);
+        text-align: center;
+        transition: var(--transition-normal);
+      }
+
+      .social-card:hover {
+        border-color: var(--accent-primary);
+        transform: translateY(-4px);
+      }
+
+      .social-card i {
+        font-size: 2.5rem;
+        color: var(--accent-primary);
+        margin-bottom: 16px;
+      }
+
+      .social-card h3 {
+        font-size: 1.2rem;
+        margin-bottom: 8px;
+      }
+
+      .social-card p {
+        color: var(--text-muted);
+        font-size: 0.9rem;
+        margin-bottom: 20px;
+      }
+
+      /* ==========================================================================
+           CONTACT SECTION
+           ========================================================================== */
+      .contact-section {
+        padding: 100px 0;
+        background: rgba(255, 255, 255, 0.01);
+      }
+
+      .contact-wrapper {
+        display: grid;
+        grid-template-columns: 1fr 1.2fr;
+        gap: 60px;
+      }
+
+      .contact-title {
+        font-size: 2.2rem;
+        font-weight: 800;
+        margin-bottom: 16px;
+      }
+
+      .contact-desc {
+        color: var(--text-muted);
+        margin-bottom: 40px;
+        font-size: 1.05rem;
+      }
+
+      .contact-methods {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+      }
+
+      .c-method {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+      }
+
+      .c-method i {
+        width: 48px;
+        height: 48px;
+        background: var(--bg-card);
+        border: 1px solid var(--border-color);
+        border-radius: var(--radius-sm);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+        color: var(--accent-primary);
+      }
+
+      .c-method span {
+        font-size: 0.85rem;
+        color: var(--text-muted);
+      }
+
+      .c-method h4 {
+        font-size: 1.05rem;
+        font-weight: 600;
+      }
+
+      .contact-form-card {
+        background: var(--bg-card);
+        border: 1px solid var(--border-color);
+        padding: 36px;
+        border-radius: var(--radius-md);
+      }
+
+      .form-group {
+        margin-bottom: 20px;
+      }
+
+      .form-group label {
+        display: block;
+        font-size: 0.9rem;
+        font-weight: 600;
+        margin-bottom: 8px;
+        color: var(--text-secondary);
+      }
+
+      .form-group input,
+      .form-group select,
+      .form-group textarea {
+        width: 100%;
+        background: var(--bg-dark);
+        border: 1px solid var(--border-color);
+        padding: 12px 16px;
+        border-radius: var(--radius-sm);
+        color: var(--text-primary);
+        font-family: var(--font-main);
+        font-size: 0.95rem;
+        outline: none;
+        transition: var(--transition-fast);
+      }
+
+      .form-group input:focus,
+      .form-group select:focus,
+      .form-group textarea:focus {
+        border-color: var(--accent-primary);
+        box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.2);
+      }
+
+      .error-msg {
+        color: #ef4444;
+        font-size: 0.8rem;
+        margin-top: 4px;
+        display: none;
+      }
+
+      .form-group.error input,
+      .form-group.error select,
+      .form-group.error textarea {
+        border-color: #ef4444;
+      }
+
+      .form-group.error .error-msg {
+        display: block;
+      }
+
+      .form-status {
+        margin-top: 16px;
+        font-size: 0.9rem;
+        text-align: center;
+        display: none;
+      }
+
+      .form-status.success {
+        display: block;
+        color: #10b981;
+      }
+
+      /* ==========================================================================
+           FOOTER
+           ========================================================================== */
+      .footer {
+        border-top: 1px solid var(--border-color);
+        padding: 40px 0;
+        background: var(--bg-dark);
+      }
+
+      .footer-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 20px;
+      }
+
+      .footer-brand h3 {
+        font-size: 1.2rem;
+        font-weight: 800;
+      }
+
+      .footer-brand p {
+        font-size: 0.85rem;
+        color: var(--text-muted);
+      }
+
+      .footer-links {
+        display: flex;
+        gap: 20px;
+      }
+
+      .footer-links a {
+        color: var(--text-secondary);
+        font-size: 1.2rem;
+        transition: var(--transition-fast);
+      }
+
+      .footer-links a:hover {
+        color: var(--accent-primary);
+      }
+
+      .footer-copy p {
+        font-size: 0.85rem;
+        color: var(--text-muted);
+      }
+
+      /* ==========================================================================
+           RESPONSIVE DESIGN (MEDIA QUERIES)
+           ========================================================================== */
+      @media (max-width: 992px) {
+        .hero-container {
+          grid-template-columns: 1fr;
+          text-align: center;
+        }
+
+        .hero-description {
+          margin: 0 auto 30px;
+        }
+
+        .manifesto-card {
+          text-align: left;
+        }
+
+        .hero-cta {
+          justify-content: center;
+        }
+
+        .hero-image-wrapper {
+          margin-top: 20px;
+        }
+
+        .about-grid,
+        .contact-wrapper {
+          grid-template-columns: 1fr;
+        }
+
+        .social-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .hamburger {
+          display: flex;
+        }
+
+        .nav-menu {
+          position: fixed;
+          top: -100%;
+          left: 0;
+          width: 100%;
+          background: var(--bg-card);
+          padding: 40px 0;
+          transition: var(--transition-normal);
+          border-bottom: 1px solid var(--border-color);
+        }
+
+        .nav-menu.active {
+          top: 60px;
+        }
+
+        .nav-list {
+          flex-direction: column;
+          align-items: center;
+          gap: 20px;
+        }
+
+        .hero-title {
+          font-size: 2.5rem;
+        }
+
+        .hero-subtitle {
+          font-size: 1.4rem;
+        }
+
+        .services-grid,
+        .projects-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .about-directions-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .footer-container {
+          flex-direction: column;
+          text-align: center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- NAVBAR -->
+    <header class="navbar-header" id="navbar">
+      <div class="container navbar-container">
+        <a href="#home" class="logo">
+          <span class="logo-code">&lt;</span>Umarbek<span class="logo-code">
+            /&gt;</span
+          >
+        </a>
+        <nav class="nav-menu" id="nav-menu">
+          <ul class="nav-list">
+            <li><a href="#home" class="nav-link active">Home</a></li>
+            <li><a href="#about" class="nav-link">About Me</a></li>
+            <li><a href="#skills" class="nav-link">Skills</a></li>
+            <li><a href="#services" class="nav-link">Services</a></li>
+            <li><a href="#projects" class="nav-link">Projects</a></li>
+            <li><a href="#contact" class="nav-link">Contact</a></li>
+          </ul>
+        </nav>
+        <div class="hamburger" id="hamburger" aria-label="Toggle navigation">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </div>
+      </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section id="home" class="hero-section">
+      <div class="container hero-container">
+        <div class="hero-content">
+          <div class="badge">
+            <span class="pulse-dot"></span> Ishga tayyor / Freelance & Full-time
+          </div>
+          <h1 class="hero-title">
+            Salom, men <span class="accent-text">Umarbek</span>
+          </h1>
+          <h2 class="hero-subtitle">Frontend Developer</h2>
+          <p class="hero-description">
+            Men zamonaviy, tezkor, chiroyli va foydalanuvchilar uchun qulay web
+            saytlar hamda interfeyslar yarataman.
+          </p>
+
+          <!-- INDEPENDENT CODE MANIFESTO -->
+          <div class="manifesto-card">
+            <div class="manifesto-icon">
+              <i class="fa-solid fa-code-commit"></i>
+            </div>
+            <div class="manifesto-text">
+              <span class="manifesto-title">Muhandislik falsafasi:</span>
+              <p>
+                AI — yordamchi vosita. Men esa kodning va UI arxitekturasining
+                qanday ishlashini tushunib, loyihani noldan mustaqil va sifatli
+                ishlab chiqa olaman.
+              </p>
+            </div>
+          </div>
+
+          <div class="hero-cta">
+            <a href="#about" class="btn btn-secondary">Men haqimda</a>
+            <a href="#projects" class="btn btn-primary">Loyihalarim</a>
+            <a href="#contact" class="btn btn-outline">Bog‘lanish</a>
+          </div>
+        </div>
+
+        <div class="hero-image-wrapper">
+          <div class="image-border-glow"></div>
+          <div class="image-card">
+            <img
+              src="photo_2026-10-03_16-40-08.jpg"
+              alt="Umarbek - Frontend Developer"
+              id="hero-img"
+            />
+          </div>
+          <div class="floating-badge badge-1">
+            <i class="fa-solid fa-desktop"></i> Frontend
+          </div>
+          <div class="floating-badge badge-2">
+            <i class="fa-solid fa-bolt"></i> Fast UI/UX
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT ME -->
+    <section id="about" class="about-section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-subtitle">// KIM MAN?</span>
+          <h2 class="section-title">About Me</h2>
+        </div>
+
+        <div class="about-grid">
+          <div class="about-main-text">
+            <p class="lead-text">
+              Men Frontend Developer sifatida zamonaviy web texnologiyalari
+              bilan professional darajada ishlayman. Web saytlarning
+              foydalanuvchiga ko'rinadigan qismini noldan loyihalash, yuqori
+              unumdorlikka ega va responsive interfeyslar yaratish bilan
+              shug'ullanaman.
+            </p>
+            <p class="secondary-text">
+              Kod yozishda faqatgina tayyor shablonlarga tayanmayman —
+              pikselma-piksel aniqlik (Pixel Perfect), moslashuvchanlik
+              (Responsive Design) va foydalanuvchi tajribasini (UX) eng yuqori
+              darajaga olib chiqish asosiy maqsadimdir.
+            </p>
+          </div>
+
+          <div class="about-directions-grid" id="about-directions">
+            <!-- Javascript orqali dinamik to'ldiriladi -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS SECTION -->
+    <section id="skills" class="skills-section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-subtitle">// TEXNOLOGIK STEK</span>
+          <h2 class="section-title">Skills & Capabilities</h2>
+        </div>
+
+        <div class="skills-wrapper" id="skills-container">
+          <!-- Javascript orqali dinamik to'ldiriladi -->
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICES SECTION -->
+    <section id="services" class="services-section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-subtitle">// NIMALAR QILA OLAMAN?</span>
+          <h2 class="section-title">Services</h2>
+        </div>
+
+        <div class="services-grid" id="services-container">
+          <!-- Javascript orqali dinamik to'ldiriladi -->
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS SECTION -->
+    <section id="projects" class="projects-section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-subtitle">// SARALANGAN ISHLAR</span>
+          <h2 class="section-title">Featured Projects</h2>
+        </div>
+
+        <div class="projects-grid" id="projects-container">
+          <!-- Javascript orqali dinamik to'ldiriladi -->
+        </div>
+      </div>
+    </section>
+
+    <!-- SOCIAL CONNECT SECTION -->
+    <section class="social-section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-subtitle">// IJTIMOIY TARMOQLAR</span>
+          <h2 class="section-title">Connect With Me</h2>
+        </div>
+
+        <div class="social-grid" id="social-container">
+          <!-- Javascript orqali dinamik to'ldiriladi -->
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section id="contact" class="contact-section">
+      <div class="container">
+        <div class="contact-wrapper">
+          <div class="contact-info">
+            <span class="section-subtitle">// BOG'LANISH</span>
+            <h2 class="contact-title">Biror loyiha g‘oyangiz bormi?</h2>
+            <p class="contact-desc">
+              Web sayt yoki sifatli frontend interfeys kerak bo‘lsa, men bilan
+              bog‘laning. G'oyangizni muhokama qilamiz va uni mukammal darajaga
+              olib chiqamiz.
+            </p>
+            <div class="contact-methods">
+              <div class="c-method">
+                <i class="fa-solid fa-envelope"></i>
+                <div>
+                  <span>Email</span>
+                  <h4 id="contact-email-text">AybekovUmarbek@gmail.com</h4>
+                </div>
+              </div>
+              <div class="c-method">
+                <i class="fa-brands fa-telegram"></i>
+                <div>
+                  <span>Telegram</span>
+                  <h4 id="contact-telegram-text">@umarbek027</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="contact-form-card">
+            <form id="contact-form" novalidate>
+              <div class="form-group">
+                <label for="name">Ismingiz</label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  placeholder="Masalan: Ali Valiyev"
+                  required
+                />
+                <span class="error-msg" id="name-error"
+                  >Ismingizni kiriting</span
+                >
+              </div>
+
+              <div class="form-group">
+                <label for="contact-info">Email yoki Telegram username</label>
+                <input
+                  type="text"
+                  id="contact-info"
+                  name="contact_info"
+                  placeholder="@username yoki mail@example.com"
+                  required
+                />
+                <span class="error-msg" id="contact-error"
+                  >Bog'lanish ma'lumotini kiriting</span
+                >
+              </div>
+
+              <div class="form-group">
+                <label for="service-type">Xizmat turi</label>
+                <select id="service-type" name="service_type" required>
+                  <option value="" disabled selected>
+                    Xizmat turini tanlang
+                  </option>
+                  <option value="website">Web Website Development</option>
+                  <option value="landing">Landing Page</option>
+                  <option value="frontend">Frontend Development</option>
+                  <option value="redesign">Website Redesign</option>
+                </select>
+                <span class="error-msg" id="service-error"
+                  >Xizmat turini tanlang</span
+                >
+              </div>
+
+              <div class="form-group">
+                <label for="message">Xabar</label>
+                <textarea
+                  id="message"
+                  name="message"
+                  rows="4"
+                  placeholder="Loyiha haqida qisqacha ma'lumot..."
+                  required
+                ></textarea>
+                <span class="error-msg" id="message-error"
+                  >Xabarni kiriting</span
+                >
+              </div>
+
+              <button
+                type="submit"
+                class="btn btn-primary btn-block"
+                id="submit-btn"
+              >
+                <span>Yuborish</span>
+                <i class="fa-solid fa-paper-plane"></i>
+              </button>
+
+              <div class="form-status" id="form-status"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="container footer-container">
+        <div class="footer-brand">
+          <h3>Umarbek</h3>
+          <p>Frontend Developer</p>
+        </div>
+
+        <div class="footer-links" id="footer-links">
+          <!-- Javascript orqali dinamik linklar -->
+        </div>
+
+        <div class="footer-copy">
+          <p>&copy; 2026 Umarbek. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- JAVASCRIPT DATA & LOGIC -->
+    <script>
+      /**
+       * UMARBEK PORTFOLIO DATA CONFIGURATION
+       */
+      const portfolioData = {
+        profile: {
+          name: "Umarbek",
+          role: "Frontend Developer",
+          email: "umarbek@example.com",
+          telegramUsername: "@umarbek027",
+          telegramLink: "https://t.me/umarbek027",
+          telegramChannelLink: "https://t.me/TecherUmar01",
+          instagramLink: "https://instagram.com/umarbek_dev",
+          githubLink: "https://github.com/umarbek-dev",
+          profileImage: "photo_2026-10-03_15-29-47.jpg",
+        },
+
+        aboutDirections: [
+          { title: "Frontend Development", icon: "fa-solid fa-desktop" },
+          {
+            title: "Responsive Web Design",
+            icon: "fa-solid fa-mobile-screen-button",
+          },
+          { title: "UI/UX Implementation", icon: "fa-solid fa-paintbrush" },
+          {
+            title: "Web Performance & Optimization",
+            icon: "fa-solid fa-gauge-high",
+          },
+          { title: "Cross-Browser Compatibility", icon: "fa-solid fa-globe" },
+          {
+            title: "Interactive Web Animations",
+            icon: "fa-solid fa-wand-magic-sparkles",
+          },
+        ],
+
+        skills: [
+          {
+            category: "Frontend Core & Frameworks",
+            items: [
+              {
+                name: "HTML5",
+                desc: "Semantik va SEO-friendly tuzilma",
+                icon: "fa-brands fa-html5",
+              },
+              {
+                name: "CSS3",
+                desc: "Flexbox, Grid, Animations, Responsive",
+                icon: "fa-brands fa-css3-alt",
+              },
+              {
+                name: "JavaScript",
+                desc: "ES6+, DOM Manipulation, Async/Await",
+                icon: "fa-brands fa-js",
+              },
+              {
+                name: "React",
+                desc: "SPA, Hooks, Components, State Management",
+                icon: "fa-brands fa-react",
+              },
+            ],
+          },
+          {
+            category: "Tools & Ecosystem",
+            items: [
+              {
+                name: "Git",
+                desc: "Versiyalarni boshqarish tizimi",
+                icon: "fa-brands fa-git-alt",
+              },
+              {
+                name: "GitHub",
+                desc: "Loyiha va kodlarni saqlash",
+                icon: "fa-brands fa-github",
+              },
+              {
+                name: "REST API Integration",
+                desc: "Backend API bilan ishlash va integratsiya",
+                icon: "fa-solid fa-arrows-split-up-and-left",
+              },
+              {
+                name: "Responsive Design",
+                desc: "Har qanday ekranga moslashuvchanlik",
+                icon: "fa-solid fa-display",
+              },
+            ],
+          },
+        ],
+
+        services: [
+          {
+            title: "Web Website Development",
+            desc: "Bizneslar, shaxsiy brendlar va loyihalar uchun zamonaviy, tez ishlovchi va responsive web saytlar yarataman.",
+            icon: "fa-solid fa-globe",
+          },
+          {
+            title: "Landing Page Development",
+            desc: "Mahsulot, xizmat yoki biznes uchun yuqori konversiyaga ega (conversion-oriented) landing page yarataman.",
+            icon: "fa-solid fa-rocket",
+          },
+          {
+            title: "Frontend Development",
+            desc: "Tayyor dizaynlarni (Figma/PSD) mukammal, to'liq moslashuvchan va interaktiv kodingga o'tkazaman.",
+            icon: "fa-solid fa-code",
+          },
+          {
+            title: "Website Redesign",
+            desc: "Eski web saytlarni zamonaviy, tezkor, responsive va UI/UX standartlariga mos ko‘rinishga olib kelaman.",
+            icon: "fa-solid fa-wand-magic-sparkles",
+          },
+        ],
+
+        projects: [
+          {
+            title: "Modern Portfolio & Showcase WebApp",
+            desc: "Zamonaviy UI/UX va animatsiyalarga ega bo'lgan shaxsiy va biznes portfolio sayti.",
+            tech: ["React", "JavaScript", "CSS3", "HTML5"],
+            image:
+              "https://images.unsplash.com/photo-1557821552-17105176677c?auto=format&fit=crop&w=800&q=80",
+            github: "https://github.com/umarbek-dev",
+            demo: "https://example.com",
+          },
+          {
+            title: "E-Commerce Landing Page",
+            desc: "Mahsulotlarni sotish va namoyish qilish uchun optimallashtirilgan responsive landing page.",
+            tech: ["HTML5", "CSS3", "JavaScript"],
+            image:
+              "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80",
+            github: "https://github.com/umarbek-dev",
+            demo: "https://example.com",
+          },
+        ],
+      };
+
+      document.addEventListener("DOMContentLoaded", () => {
+        renderAboutDirections();
+        renderSkills();
+        renderServices();
+        renderProjects();
+        renderSocials();
+        setupContactInfo();
+
+        // Navbar Scroll Effect
+        const navbar = document.getElementById("navbar");
+        window.addEventListener("scroll", () => {
+          if (window.scrollY > 50) {
+            navbar.classList.add("scrolled");
+          } else {
+            navbar.classList.remove("scrolled");
+          }
+          highlightNavOnScroll();
+        });
+
+        // Mobile Menu Toggle
+        const hamburger = document.getElementById("hamburger");
+        const navMenu = document.getElementById("nav-menu");
+
+        hamburger.addEventListener("click", () => {
+          navMenu.classList.toggle("active");
+        });
+
+        document.querySelectorAll(".nav-link").forEach((link) => {
+          link.addEventListener("click", () => {
+            navMenu.classList.remove("active");
+          });
+        });
+
+        // Form Submit
+        const contactForm = document.getElementById("contact-form");
+        if (contactForm) {
+          contactForm.addEventListener("submit", handleFormSubmit);
+        }
+      });
+
+      function renderAboutDirections() {
+        const container = document.getElementById("about-directions");
+        if (!container) return;
+        container.innerHTML = portfolioData.aboutDirections
+          .map(
+            (dir) => `
+                <div class="dir-card">
+                    <i class="${dir.icon}"></i>
+                    <h4>${dir.title}</h4>
+                </div>
+            `,
+          )
+          .join("");
+      }
+
+      function renderSkills() {
+        const container = document.getElementById("skills-container");
+        if (!container) return;
+        container.innerHTML = portfolioData.skills
+          .map(
+            (cat) => `
+                <div class="skills-category">
+                    <h3 class="category-title">${cat.category}</h3>
+                    <div class="skills-grid">
+                        ${cat.items
+                          .map(
+                            (skill) => `
+                            <div class="skill-card">
+                                <div class="skill-icon"><i class="${skill.icon}"></i></div>
+                                <div class="skill-info">
+                                    <h4>${skill.name}</h4>
+                                    <p>${skill.desc}</p>
+                                </div>
+                            </div>
+                        `,
+                          )
+                          .join("")}
+                    </div>
+                </div>
+            `,
+          )
+          .join("");
+      }
+
+      function renderServices() {
+        const container = document.getElementById("services-container");
+        if (!container) return;
+        container.innerHTML = portfolioData.services
+          .map(
+            (service) => `
+                <div class="service-card">
+                    <div>
+                        <div class="service-icon"><i class="${service.icon}"></i></div>
+                        <h3 class="service-title">${service.title}</h3>
+                        <p class="service-desc">${service.desc}</p>
+                    </div>
+                    <a href="#contact" class="btn btn-secondary">Buyurtma berish</a>
+                </div>
+            `,
+          )
+          .join("");
+      }
+
+      function renderProjects() {
+        const container = document.getElementById("projects-container");
+        if (!container) return;
+        container.innerHTML = portfolioData.projects
+          .map(
+            (p) => `
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="${p.image}" alt="${p.title}">
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">${p.title}</h3>
+                        <p class="project-desc">${p.desc}</p>
+                        <div class="project-tech">
+                            ${p.tech.map((t) => `<span class="tech-tag">${t}</span>`).join("")}
+                        </div>
+                        <div class="project-links">
+                            <a href="${p.github}" target="_blank" class="btn btn-secondary"><i class="fa-brands fa-github"></i> GitHub</a>
+                            <a href="${p.demo}" target="_blank" class="btn btn-primary"><i class="fa-solid fa-arrow-up-right-from-square"></i> Live Demo</a>
+                        </div>
+                    </div>
+                </div>
+            `,
+          )
+          .join("");
+      }
+
+      function renderSocials() {
+        const container = document.getElementById("social-container");
+        if (!container) return;
+
+        const socials = [
+          {
+            name: "Telegram Profil",
+            desc: "Men bilan Telegram orqali bog‘laning",
+            link: portfolioData.profile.telegramLink,
+            icon: "fa-brands fa-telegram",
+          },
+          {
+            name: "Telegram Kanal",
+            desc: "Mening rasmiy Telegram kanali sahifam",
+            link: portfolioData.profile.telegramChannelLink,
+            icon: "fa-solid fa-bullhorn",
+          },
+          {
+            name: "Instagram",
+            desc: "Mening Instagram sahifam",
+            link: portfolioData.profile.instagramLink,
+            icon: "fa-brands fa-instagram",
+          },
+          {
+            name: "GitHub",
+            desc: "Mening GitHub sahifam va loyihalarim",
+            link: portfolioData.profile.githubLink,
+            icon: "fa-brands fa-github",
+          },
+        ];
+
+        container.innerHTML = socials
+          .map(
+            (s) => `
+                <div class="social-card">
+                    <i class="${s.icon}"></i>
+                    <h3>${s.name}</h3>
+                    <p>${s.desc}</p>
+                    <a href="${s.link}" target="_blank" class="btn btn-outline">${s.name}</a>
+                </div>
+            `,
+          )
+          .join("");
+
+        const footerLinks = document.getElementById("footer-links");
+        if (footerLinks) {
+          footerLinks.innerHTML = `
+                    <a href="${portfolioData.profile.telegramLink}" target="_blank" title="Telegram Profil"><i class="fa-brands fa-telegram"></i></a>
+                    <a href="${portfolioData.profile.telegramChannelLink}" target="_blank" title="Telegram Kanal"><i class="fa-solid fa-bullhorn"></i></a>
+                    <a href="${portfolioData.profile.instagramLink}" target="_blank" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="${portfolioData.profile.githubLink}" target="_blank" title="GitHub"><i class="fa-brands fa-github"></i></a>
+                    <a href="mailto:${portfolioData.profile.email}" title="Email"><i class="fa-solid fa-envelope"></i></a>
+                `;
+        }
+      }
+
+      function setupContactInfo() {
+        const emailElem = document.getElementById("contact-email-text");
+        const tgElem = document.getElementById("contact-telegram-text");
+        if (emailElem) emailElem.innerText = portfolioData.profile.email;
+        if (tgElem) tgElem.innerText = portfolioData.profile.telegramUsername;
+      }
+
+      function highlightNavOnScroll() {
+        const sections = document.querySelectorAll("section[id]");
+        const scrollY = window.pageYOffset;
+
+        sections.forEach((current) => {
+          const sectionHeight = current.offsetHeight;
+          const sectionTop = current.offsetTop - 100;
+          const sectionId = current.getAttribute("id");
+
+          if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+            document
+              .querySelector(`.nav-list a[href*=${sectionId}]`)
+              ?.classList.add("active");
+          } else {
+            document
+              .querySelector(`.nav-list a[href*=${sectionId}]`)
+              ?.classList.remove("active");
+          }
+        });
+      }
+
+      function handleFormSubmit(e) {
+        e.preventDefault();
+        let isValid = true;
+        const inputs = [
+          { id: "name" },
+          { id: "contact-info" },
+          { id: "service-type" },
+          { id: "message" },
+        ];
+
+        inputs.forEach((item) => {
+          const input = document.getElementById(item.id);
+          if (!input) return;
+          const group = input.parentElement;
+          if (!input.value.trim()) {
+            group.classList.add("error");
+            isValid = false;
+          } else {
+            group.classList.remove("error");
+          }
+        });
+
+        if (isValid) {
+          const status = document.getElementById("form-status");
+          if (status) {
+            status.className = "form-status success";
+            status.innerText =
+              "Xabaringiz muvaffaqiyatli yuborildi! Tez orada bog'lanaman.";
+            e.target.reset();
+            setTimeout(() => {
+              status.innerText = "";
+            }, 5000);
+          }
+        }
+      }
+    </script>
+  </body>
+</html>
